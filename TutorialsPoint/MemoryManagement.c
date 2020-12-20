@@ -1,0 +1,64 @@
+// Used to be able to use strcpy and strcat (insted of strcpy_s and strcat_s)
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+int AllocatingMemoryDynamically() {
+
+	char name[100];
+	char* description;
+
+	strcpy(name, "Zara Ali");
+
+	// allocate memory dynamically
+	description = malloc(200 * sizeof(char));
+
+	if (description == NULL) {
+		fprintf(stderr, "Error - unable to allocate required memory\n");
+	} else {
+		strcpy(description, "Zara ali a DPS student in class 10th");
+	}
+
+	printf("Name = %s\n", name);
+	printf("Description: %s\n", description);
+
+	return 0;
+}
+
+
+int ResizingaReleasingMemory() {
+
+	char name[100];
+	char* description;
+
+	strcpy(name, "Zara Ali");
+
+	// allocate memory dynamically
+	description = malloc(30 * sizeof(char));
+
+	if (description == NULL) {
+		fprintf(stderr, "Error - unable to allocate required memory\n");
+	} else {
+		strcpy(description, "Zara ali a DPS student.");
+	}
+
+	// suppose you want to store bigger description
+	description = realloc(description, 100 * sizeof(char));
+
+	if (description == NULL) {
+		fprintf(stderr, "Error - unable to allocate required memory\n");
+	} else {
+		strcat(description, "She is in class 10th");
+	}
+
+	printf("Name = %s\n", name);
+	printf("Description: %s\n", description);
+
+	// release memory using free() function
+	free(description);
+
+	return 0;
+}
